@@ -45,7 +45,7 @@ class MaUserController extends Controller
         $data->username = $request->username;
         $data->password = bcrypt($request->username);
         $data->role = $request->role;
-        $data->status = 'AKTIF';
+        $data->status = $request->status;
         $data->save();
 
         return response()->json([
@@ -96,6 +96,8 @@ class MaUserController extends Controller
 
         $data->nama_lengkap = $request->nama_lengkap;
         $data->role = $request->role;
+        $data->status = $request->status;
+        $data->username = $request->username;
         $data->update();
 
         return response()->json([

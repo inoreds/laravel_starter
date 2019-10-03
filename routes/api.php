@@ -15,10 +15,13 @@ use Illuminate\Http\Request;
 
 Route::prefix('auth')->group(function () {
     Route::post('login', 'AuthController@login');
-    Route::get('refresh', 'AuthController@refresh');     
+    Route::get('refresh', 'AuthController@refresh');    
+    Route::get('user', 'AuthController@user');  
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('logout', 'AuthController@logout');
         Route::post('change_password', 'AuthController@changePassword');
-        Route::get('user', 'AuthController@user');;
     });
+});
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::resource('user', 'MaUserController');;
 });
