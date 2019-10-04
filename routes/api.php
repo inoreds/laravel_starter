@@ -22,6 +22,15 @@ Route::prefix('auth')->group(function () {
         Route::post('change_password', 'AuthController@changePassword');
     });
 });
+
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::resource('user', 'MaUserController');;
+    Route::group(['middleware' => 'isRoot'], function(){
+       
+    });
+    Route::group(['middleware' => 'isRootOrAdmin'], function(){
+        Route::resource('user', 'MaUserController');;
+    });
+    Route::group(['middleware' => 'isUser'], function(){
+       
+    });
 });
